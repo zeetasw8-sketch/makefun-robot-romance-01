@@ -22,12 +22,16 @@ function muatKalimat(): string {
   return mentah.replace(/(\r\n|\n|\r)+$/, "");
 }
 
-function pastikanSatuKalimat(kalimat: string): void {
+function pastikanPanjangValid(kalimat: string): void {
   if (kalimat.length < 1 || kalimat.length > 200) {
     throw new Error(
       `Panjang baris harus 1-200 karakter, dapat ${kalimat.length}.`,
     );
   }
+}
+
+function pastikanSatuKalimat(kalimat: string): void {
+  pastikanPanjangValid(kalimat);
   const penandaAkhir: string[] = kalimat.match(/[.!?]/g) ?? [];
   const diakhiriTanda: boolean = /[.!?]$/.test(kalimat);
   if (penandaAkhir.length !== 1 || !diakhiriTanda) {
